@@ -59,6 +59,14 @@ public class ContactBook {
     public void setEmail(String name, String email) {
         contacts[searchIndex(name)].setEmail(email);
     }
+    
+    public Contact getContact(int phoneNumber) {
+        for(Contact contact : contacts){
+            if (contact.getPhone() == phoneNumber)
+                return contact;
+        }
+        return null;
+    }
 
     private int searchIndex(String name) {
         int i = 0;
