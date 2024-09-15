@@ -60,12 +60,13 @@ public class ContactBook {
         contacts[searchIndex(name)].setEmail(email);
     }
     
-    public Contact getContact(int phoneNumber) {
+    public String getContact(int phoneNumber) {
+        String holder = null;
         for(Contact contact : contacts){
-            if (contact.getPhone() == phoneNumber)
-                return contact;
+            if (contact.getPhone() == phoneNumber && holder == null)
+                holder = contact.getName();
         }
-        return null;
+        return holder;
     }
 
     private int searchIndex(String name) {
