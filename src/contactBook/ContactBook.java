@@ -35,8 +35,8 @@ public class ContactBook {
     //Pre: name != null && hasContact(name)
     public void deleteContact(String name) {
         int index = searchIndex(name);
-        for(int i=index; i<counter; i++)
-            contacts[i] = contacts[i+1];
+        for (int i = index; i < counter; i++)
+            contacts[i] = contacts[i + 1];
         counter--;
     }
 
@@ -59,15 +59,12 @@ public class ContactBook {
     public void setEmail(String name, String email) {
         contacts[searchIndex(name)].setEmail(email);
     }
-    
-    public String getContact(int phoneNumber) {
-        String holder = null;
-        if(contacts.length == 0) {
 
-            for (Contact contact : contacts) {
-                if (contact.getPhone() == phoneNumber && holder == null)
-                    holder = contact.getName();
-            }
+    public String getContact(int phoneNumber) {
+        String holder = "";
+        for (Contact contact : contacts) {
+            if (contact.getPhone() == phoneNumber && holder.isEmpty())
+                holder = contact.getName();
         }
         return holder;
     }
@@ -76,7 +73,7 @@ public class ContactBook {
         int i = 0;
         int result = -1;
         boolean found = false;
-        while (i<counter && !found)
+        while (i < counter && !found)
             if (contacts[i].getName().equals(name))
                 found = true;
             else
@@ -85,9 +82,13 @@ public class ContactBook {
         return result;
     }
 
+    private boolean contactsIsEmpty() {
+        return contacts.length == 0;
+    }
+
     private void resize() {
-        Contact tmp[] = new Contact[2*contacts.length];
-        for (int i=0;i<counter; i++)
+        Contact tmp[] = new Contact[2 * contacts.length];
+        for (int i = 0; i < counter; i++)
             tmp[i] = contacts[i];
         contacts = tmp;
     }
@@ -97,7 +98,7 @@ public class ContactBook {
     }
 
     public boolean hasNext() {
-        return (currentContact >= 0 ) && (currentContact < counter);
+        return (currentContact >= 0) && (currentContact < counter);
     }
 
     //Pre: hasNext()
