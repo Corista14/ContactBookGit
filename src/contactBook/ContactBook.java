@@ -106,4 +106,21 @@ public class ContactBook {
         return contacts[currentContact++];
     }
 
+    public boolean areDuplicates(){
+        int i=0;
+        boolean duplicates=false;
+        while ((i<this.contacts.length)&&(!duplicates)){
+            int j=0;
+            while((j<this.contacts.length)&&(!duplicates)){
+
+                if(i!=j&&this.contacts[i].getPhone()==this.contacts[j].getPhone()){
+                    duplicates=true;
+                }
+                j++;
+            }
+            i++;
+        }
+        return duplicates;
+    }
+
 }
