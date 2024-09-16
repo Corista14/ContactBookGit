@@ -118,6 +118,7 @@ public class ContactBook {
 
                 if(i!=j&&this.contacts[i].getPhone()==this.contacts[j].getPhone()){
                     duplicates=true;
+
                 }
                 j++;
             }
