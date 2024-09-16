@@ -1,7 +1,5 @@
 package contactBook;
 
-import contactBook.Contact;
-
 public class ContactBook {
     static final int DEFAULT_SIZE = 100;
 
@@ -63,11 +61,13 @@ public class ContactBook {
     public String getContact(int phoneNumber) {
         String holder = "";
         int i = 0;
-        while(i< contacts.length && holder.isEmpty())   {
-            if (contacts[i].getPhone() == phoneNumber) {
-                holder = contacts[i].getName();
+        if (counter > 0) {
+            while (i < counter && holder.isEmpty()) {
+                if (contacts[i].getPhone() == phoneNumber) {
+                    holder = contacts[i].getName();
+                }
+                i++;
             }
-            i++;
         }
         return holder;
     }
@@ -83,10 +83,6 @@ public class ContactBook {
                 i++;
         if (found) result = i;
         return result;
-    }
-
-    private boolean contactsIsEmpty() {
-        return contacts.length == 0;
     }
 
     private void resize() {
@@ -109,21 +105,22 @@ public class ContactBook {
         return contacts[currentContact++];
     }
 
-    public boolean areDuplicates(){
-        int i=0;
-        boolean duplicates=false;
-        while ((i<this.contacts.length)&&(!duplicates)){
-            int j=0;
-            while((j<this.contacts.length)&&(!duplicates)){
-
-                if(i!=j&&this.contacts[i].getPhone()==this.contacts[j].getPhone()){
-                    duplicates=true;
-
+    public boolean areDuplicates() {
+        int i = 0;
+        boolean duplicates = false;
+        if (counter > 0) {
+            while ((i < counter) && (!duplicates)) {
+                int j = 0;
+                while ((j < counter) && (!duplicates)) {
+                    if (i != j && this.contacts[i].getPhone() == this.contacts[j].getPhone()) {
+                        duplicates = true;
+                    }
+                    j++;
                 }
-                j++;
+                i++;
             }
-            i++;
         }
+
         return duplicates;
     }
 
