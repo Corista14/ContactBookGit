@@ -62,9 +62,12 @@ public class ContactBook {
 
     public String getContact(int phoneNumber) {
         String holder = "";
-        for (Contact contact : contacts) {
-            if (contact.getPhone() == phoneNumber && holder.isEmpty())
-                holder = contact.getName();
+        int i = 0;
+        while(i< contacts.length && holder.isEmpty())   {
+            if (contacts[i].getPhone() == phoneNumber) {
+                holder = contacts[i].getName();
+            }
+            i++;
         }
         return holder;
     }
