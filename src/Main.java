@@ -28,7 +28,7 @@ public class Main {
     public static final String COMMAND_ERROR = "Unknown command.";
     public static final String PHONE_NOT_EXIST = "Phone number does not exist.";
     public static final String SHARE_NUMBER = "There are contacts that share phone numbers.";
-    public static final String DIFFERENT_NUMBERS = "All contacts have different phone numbers";
+    public static final String DIFFERENT_NUMBERS = "All contacts have different phone numbers.";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -59,10 +59,10 @@ public class Main {
                     listAllContacts(cBook);
                     break;
                 case GIVEN_NUMBER:
-                    // TODO: Add the functionality to retrieve a contact given the phone number
+                    getContactByPhone(in, cBook);
                     break;
                 case EQUAL_PHONES:
-                    // TODO: Add the functionality to check if there are duplicate phone numbers
+                    equalPhones(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -80,6 +80,23 @@ public class Main {
 
         input = in.nextLine().toUpperCase();
         return input;
+    }
+
+    private static void getContactByPhone(Scanner in, ContactBook cBook) {
+        int phone;
+        phone = in.nextInt(); in.nextLine();
+
+        String contact = cBook.getContact(phone);
+
+        if (contact.isEmpty()) System.out.println(PHONE_NOT_EXIST);
+        else System.out.println(contact);
+    }
+
+    private static void equalPhones(ContactBook cBook) {
+        boolean dup = cBook.areDuplicates();
+
+        if (dup) System.out.println(SHARE_NUMBER);
+        else System.out.println(DIFFERENT_NUMBERS);
     }
 
     private static void addContact(Scanner in, ContactBook cBook) {
